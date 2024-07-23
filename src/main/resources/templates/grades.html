@@ -1,4 +1,67 @@
 
+   <style type="text/css">
+    /* Centralizando a tabela e o título */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Estilizando a tabela */
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #eaeaea;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    table {
+        width: 100%;
+    }
+
+    th, td {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+   </style>
+  <div class="container">
     <h2>Grades</h2>
     <table id="table">
         <tr>
@@ -6,9 +69,10 @@
             <th>Subject</th>
             <th>Score</th>
         </tr>
-        <tr>
-            <td th:text="{grade.name}"></td>
-            <td th:text="{grade.subject}"></td>
-            <td th:text="{grade.score}"></td>
+        <tr th:object="${grade}">
+            <td th:text="*{name}"></td>
+            <td th:text="*{subject}"></td>
+            <td th:text="*{score}"></td>
         </tr>
     </table>
+</div>

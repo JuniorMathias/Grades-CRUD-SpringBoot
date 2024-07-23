@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class GradeController {
 
-    @GetMapping("/grades")
+    @GetMapping("/shows")
     public String getGrades(Model model) {
         Grade grade = new Grade("HARRY", "POTIONS", "C-");
         model.addAttribute("grade", grade);
         return "shows";
     }
 
-    @GetMapping("/table")
+    @GetMapping("/grades")
     public String newProductForm(Model model) {
         Grade grade = new Grade("HARRY", "POTIONS", "C-");
         model.addAttribute("grade", grade);
