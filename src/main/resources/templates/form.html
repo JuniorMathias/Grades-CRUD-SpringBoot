@@ -8,6 +8,8 @@
 </head>
 <body>
 <div class="container">
+    <a th:href="@{/}" > Form</a>
+    <a th:href="@{/grades}" > Grades</a>
     <h2>Grades Portal</h2>
     
     <form method="post" th:object="${grade}" th:action="@{/handleSubmit}">
