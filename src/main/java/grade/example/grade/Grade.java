@@ -1,18 +1,24 @@
 package grade.example.grade;
 
+import java.util.UUID;
+
 public class Grade {
+    private String id;
     private String name;
     private String subject;
     private String score;
 
-    public Grade(String name, String subject, String score) {
-        this.name = name;
-        this.subject = subject;
-        this.score = score;
+    public Grade() {
+        this.id = UUID.randomUUID().toString();
     }
 
-    public Grade() {
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
