@@ -11,17 +11,17 @@
     <a th:href="@{/}" > Form</a>
     <a th:href="@{/grades}" > Grades</a>
     <h2>Grades</h2>
-    <table id="table">
+    <table id="students">
         <tr>
             <th>Student</th>
-            <th>Subject</th>
             <th>Score</th>
+            <th>Subject</th>
             <th></th>
         </tr>
         <tr th:each="grade: ${grades}">
             <td th:text="*{grade.name}"></td>
-            <td th:text="*{grade.subject}"></td>
             <td th:text="*{grade.score}"></td>
+            <td th:text="*{grade.subject}"></td>
             <td><a role="button" class="update" th:href="@{/(id = ${grade.id})}">Update</a></td>
         </tr>
     </table>
