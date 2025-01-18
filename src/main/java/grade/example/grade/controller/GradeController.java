@@ -1,7 +1,4 @@
-package grade.example.grade;
-
-import java.util.ArrayList;
-import java.util.List;
+package grade.example.grade.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,26 +8,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import grade.example.grade.Constants;
+import grade.example.grade.Grade;
+import grade.example.grade.repository.GradeRepository;
 import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/")
 public class GradeController {
 
-    List<Grade> studentsGrades = new ArrayList<>();
-    // List<Grade> studentsGrades = Arrays.asList(
-    //     new Grade("HARRY", "POTIONS", "C-"),
-    //     new Grade("Kane", "TOP", "A-"),
-    //     new Grade("JASON", "MAMOA", "B+")
-    // );
+   GradeRepository gradeRepository = new GradeRepository();
 
     @GetMapping("/")
     public String gradeForm(Model model, @RequestParam(required = false) String id) {
        int gradeIndex = getGradeIndex(id);
-        model.addAttribute("grade", 
-            gradeIndex == Constants.NOT_FOUND 
+        model.addAttribute("grade", gradeIndex == Constants.NOT_FOUND 
             ? new Grade() 
-            : studentsGrades.get(gradeIndex));
+            : gradeRepository.getGrade(gradeIndex));
         return "form";
     }
 
@@ -40,9 +34,9 @@ public class GradeController {
        if (result.hasErrors()) return "form";
         int index = getGradeIndex(grade.getId());
         if(index == Constants.NOT_FOUND) {
-            studentsGrades.add(grade);
+           gradeRepository.addGrade(grade);
         }else{
-            studentsGrades.set(index, grade);
+            gradeRepository.updateGrade(grade, index);
         }
         return "redirect:/grades";
     }
@@ -50,13 +44,13 @@ public class GradeController {
 
     @GetMapping("/grades")
     public String newProductForm(Model model) {
-        model.addAttribute("grades", studentsGrades);
+        model.addAttribute("grades", gradeRepository.getGrades());
         return "grades";
     }
 
     public Integer getGradeIndex(String id){
-        for( int i = 0; i < studentsGrades.size(); i++){
-            if(studentsGrades.get(i).getId().equals(id)){
+        for( int i = 0; i < gradeRepository.getGrades().size(); i++){
+            if(gradeRepository.getGrades().get(i).getId().equals(id)){
                 return i;
             }
         }
