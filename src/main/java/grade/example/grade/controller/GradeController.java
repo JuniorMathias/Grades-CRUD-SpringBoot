@@ -1,5 +1,6 @@
 package grade.example.grade.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +17,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/")
 public class GradeController {
 
-   GradeService gradeService = new GradeService();
+    @Autowired
+   GradeService gradeService;
 
     @GetMapping("/")
     public String gradeForm(Model model, @RequestParam(required = false) String id) {
